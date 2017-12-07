@@ -2,15 +2,13 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-	"github.com/gorilla/mux"
-	"fmt"
 )
 
 func GetPeopleEndpoint(w http.ResponseWriter, req *http.Request) {
-	json.NewEncoder(w).Encode(getUsers()[0].email)
-	fmt.Print(getUsers()[0].email)
+	json.NewEncoder(w).Encode(getUsers())
 }
 
 func main() {

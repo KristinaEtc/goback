@@ -1,13 +1,13 @@
 package main
 
 type user struct {
-	id   int
-	username string
-	email  string
+	Id       int    `json:"id"`
+	Username string `json:"username"`
+	Email    string `json:"email"`
 }
 
 type dog struct {
-	id int
+	id   int
 	name string
-	age int
+	age  int
 }
