@@ -15,30 +15,17 @@ type Config struct {
 	Name     string `json:"name"`
 }
 
-var config Config
+const configPath = "../goback/config.json"
 
 func GetConfig() Config {
-	configFile := readFile("../goback/config.json")
-	createConfig(configFile, "json")
-
-	return config
-}
-
-func readFile(path string) *os.File {
-	configFile, err := os.Open(path)
+	var config Config
+	configFile, err := os.Open(configPath)
 	defer configFile.Close()
 	if err != nil {
 		log.Fatal("Cannot find config file:", err)
 	}
-	return configFile
-}
+	jsonParser := json.NewDecoder(configFile)
+	jsonParser.Decode(&config)
 
-func createConfig(file *os.File, format string) {
-	switch format {
-	case "json":
-		jsonParser := json.NewDecoder(file)
-		jsonParser.Decode(&config)
-	default:
-		log.Fatal("Config file type is not supported")
-	}
+	return config
 }
